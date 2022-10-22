@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +19,24 @@ import java.util.List;
 public class RoomActivity extends AppCompatActivity {
 
 
-    private ListView list;
+    private ArrayList<RoomData> arrayList;
+    private RoomAdapter roomAdapter;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
-        list = (ListView)findViewById(R.id.list);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerVeiw);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        List<String> data = new ArrayList<>();
+        arrayList = new ArrayList<>();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,data);
-        list.setAdapter(adapter);
-
+        roomAdapter = new RoomAdapter(arrayList);
+        recyclerView.setAdapter(roomAdapter);
 
 
     }
